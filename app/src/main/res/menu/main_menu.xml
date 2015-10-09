@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item
+		android:id="@+id/retrofit_stetho"
+		android:title="Retrofit Stetho"/>
+	<item
+		android:id="@+id/retrofit_proxy_no_ssl"
+		android:title="Retrofit Proxy No SSL"/>
+	<item
+		android:id="@+id/retrofit_proxy"
+		android:title="Retrofit Proxy"/>
+
+</menu>

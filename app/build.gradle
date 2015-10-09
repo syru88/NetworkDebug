@@ -20,11 +20,16 @@ dependencies
 			compile 'com.android.support:support-v4:23.0.0'
 			compile 'com.android.support:appcompat-v7:23.0.0'
 			compile 'com.android.support:design:23.0.0'
-			compile 'com.google.android.gms:play-services:7.8.0'
 
 			// network
 			compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
 			compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+			compile 'com.mcxiaoke.volley:library:1.0.19'
+
+			// stetho
+			compile 'com.facebook.stetho:stetho:1.2.0'
+			compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
+			compile 'com.facebook.stetho:stetho-urlconnection:1.2.0'
 
 			compile fileTree(dir: 'libs', include: ['*.jar'])
 		}
@@ -60,7 +65,8 @@ android
 						debug
 								{
 									buildConfigField "boolean", "LOGS", "true"
-									buildConfigField "boolean", "DEV_API", "true"
+									buildConfigField "boolean", "IS_PROXY_ENABLED", "true"
+									buildConfigField "String", "PROXY_IP", localAddress()
 
 									versionNameSuffix "-debug"
 								}
@@ -68,7 +74,8 @@ android
 						release
 								{
 									buildConfigField "boolean", "LOGS", "false"
-									buildConfigField "boolean", "DEV_API", "false"
+									buildConfigField "boolean", "IS_PROXY_ENABLED", "false"
+									buildConfigField "String", "PROXY_IP", "null"
 
 									signingConfig signingConfigs.release
 									zipAlignEnabled true
@@ -99,6 +106,24 @@ android
 							}
 					}
 		}
+
+def localAddress() {
+	def ip_address
+	java.net.NetworkInterface.getNetworkInterfaces().each {
+		iface ->
+			iface.inetAddresses.each {
+				iface_address ->
+					if(iface.getName().equals("wlan0") && iface_address instanceof Inet4Address)
+					{
+						println iface_address.getHostAddress()
+						ip_address = "\"" + iface_address.getHostAddress() + "\""
+					}
+			}
+	}
+
+	return ip_address
+
+}
 
 
 task askForPasswords <<
