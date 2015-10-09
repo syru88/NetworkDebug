@@ -13,6 +13,8 @@ import com.marcel.networkdebug.fragment.RepositoryListFragment;
 import com.marcel.networkdebug.helper.RetrofitProxy;
 import com.marcel.networkdebug.helper.RetrofitProxyNoSSL;
 import com.marcel.networkdebug.helper.RetrofitStetho;
+import com.marcel.networkdebug.helper.VolleyProxy;
+import com.marcel.networkdebug.helper.VolleyStetho;
 
 
 public class MainActivity extends AppCompatActivity
@@ -42,6 +44,12 @@ public class MainActivity extends AppCompatActivity
 				break;
 			case R.id.retrofit_proxy_no_ssl:
 				RetrofitProxyNoSSL.loadData(getFragment(), mainView);
+				break;
+			case R.id.volley_stetho:
+				VolleyStetho.loadData(this, getFragment(), mainView);
+				break;
+			case R.id.volley_proxy:
+				VolleyProxy.loadData(this, getFragment(), mainView);
 				break;
 		}
 

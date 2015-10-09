@@ -22,9 +22,12 @@ dependencies
 			compile 'com.android.support:design:23.0.0'
 
 			// network
+			compile 'com.squareup.okhttp:okhttp:2.5.0'
+			compile 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'
 			compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
 			compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
 			compile 'com.mcxiaoke.volley:library:1.0.19'
+			compile 'com.google.code.gson:gson:2.3.1'
 
 			// stetho
 			compile 'com.facebook.stetho:stetho:1.2.0'
@@ -40,11 +43,15 @@ android
 			compileSdkVersion 23
 			buildToolsVersion "23.0.0"
 
+			// has to be used for OkHttpStack
+			// more on https://gist.github.com/bryanstern/4e8f1cb5a8e14c202750 and https://github.com/facebook/stetho/pull/51
+			useLibrary 'org.apache.http.legacy'
+
 			defaultConfig
 					{
 						minSdkVersion 15
 						targetSdkVersion 23
-						versionCode VERSION_MAJOR*10000000 + VERSION_MINOR*100000 + VERSION_PATCH*1000 + VERSION_BUILD
+						versionCode VERSION_MAJOR * 10000000 + VERSION_MINOR * 100000 + VERSION_PATCH * 1000 + VERSION_BUILD
 						versionName "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
 					}
 
@@ -95,7 +102,7 @@ android
 											output ->
 												def outputFile = output.outputFile
 												def date = new Date()
-												if(outputFile!=null && outputFile.name.endsWith('.apk'))
+												if(outputFile != null && outputFile.name.endsWith('.apk'))
 												{
 													def fileName = outputFile.name.replace(
 															"mobile",
@@ -107,7 +114,9 @@ android
 					}
 		}
 
-def localAddress() {
+
+def localAddress()
+{
 	def ip_address
 	java.net.NetworkInterface.getNetworkInterfaces().each {
 		iface ->

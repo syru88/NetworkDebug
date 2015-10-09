@@ -11,4 +11,12 @@
 		android:id="@+id/retrofit_proxy"
 		android:title="Retrofit Proxy"/>
 
+	<item
+		android:id="@+id/volley_stetho"
+		android:title="Volley Stetho"/>
+
+	<item
+		android:id="@+id/volley_proxy"
+		android:title="Volley Proxy"/>
+
 </menu>

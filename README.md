@@ -15,7 +15,7 @@ Tasks
 
 * Fiddler - http://ipv4.fiddler:8888/
 * Genymotion
-..* proxy address 10.0.3.2
+⋅⋅* proxy address 10.0.3.2
 * Real device
 * Stetho - chrome://inspect
 
